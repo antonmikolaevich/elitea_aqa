@@ -16,3 +16,7 @@ npx qavajs run --config config.js
 - [page_object](./page_object) - page objects
 - [step_definitions](./step_definitions) - project specific step definitions
 - [report](./report) - reports
+
+Notes:
+- Added QavaJS v2 Page Object Models for the intro and what's-new pages under pages/*.page.js
+- Added step definitions for the feature in steps/intro.steps.js
