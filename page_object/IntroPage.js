@@ -6,10 +6,9 @@ const { locator } = require('@qavajs/steps-playwright/po.js');
  */
 class IntroPage {
   // Selectors defined as class properties at the top
-  get whatsNewLink() { return $("=What's new in v2"); }
-  get stepsDropdown() { return $('nav=Steps'); }
-  get stepsDropdownToggle() { return $('nav a[href="#steps"]'); }
-  get stepsPackages() { return $$('nav .dropdown a'); }
+  whatsNewLink = locator("=What's new in v2");
+  stepsNavItem = locator('nav=Steps');
+  stepsPackagesList = locator('nav .dropdown a');
 
   /**
    * Clicks the "What's new in v2" link
@@ -22,7 +21,7 @@ class IntroPage {
    * Opens the Steps dropdown
    */
   async openStepsDropdown() {
-    await this.stepsDropdown.click();
+    await this.stepsNavItem.click();
   }
 
   /**
@@ -30,13 +29,13 @@ class IntroPage {
    * @returns {Promise<string[]>} list of package names
    */
   async getStepsPackages() {
-    const elements = await this.stepsPackages;
+    const elements = await this.stepsPackagesList.elements();
     const texts = [];
     for (const el of elements) {
-      texts.push(await el.innerText());
+      texts.push(await el.getText());
     }
     return texts;
   }
 }
 
-module.exports = new IntroPage();
+module.exports = IntroPage;
